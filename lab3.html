@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>lab3</title>
+  </head>
+  <body>
+    <div id = "div1"></div>
+
+     <script>
+       // fetch data from the API
+        fetch ("https://api.nasa.gov/planetary/apod?api_key=jfmJBQV0xTVlEOMAhKwtVWeJjRVCmtVVxIivIEsk")
+        
+        .then ( (response)=> {
+          return response.json()
+        })
+
+        .then ( (json) => {
+          // create an h1 element
+          let h1 = document.createElement("h1")
+          h1.innerText = "Central NGC 1316: After Galaxies Collide"
+          
+          // insert h1 element into DOM
+          document.querySelector("#div1").appendChild(h1)
+        })
+    </script>
+  </body>
+</html>
