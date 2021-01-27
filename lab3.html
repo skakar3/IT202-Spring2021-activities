@@ -23,13 +23,20 @@
           
           // insert h1 element into DOM
           document.querySelector("#div1").appendChild(h1)
-            
+
           // create an img element
           let img = document.createElement("img")
           img.setAttribute("src", "https://apod.nasa.gov/apod/image/2101/NGC1316Center_HubbleNobre_2585.jpg")
 
           // insert img element into DOM
-          document.querySelector("#div1").appendChild(img)          
+          document.querySelector("#div1").appendChild(img)
+
+          // create a p element
+          let p = document.createElement("p")
+          p.innerText = "How did this strange-looking galaxy form?  Astronomers turn detectives when trying to figure out the cause of unusual jumbles of stars, gas, and dust like NGC 1316. Inspection indicates that NGC 1316 is an enormous elliptical galaxy that somehow includes dark dust lanes usually found in a spiral galaxy.  Detailed images taken by the Hubble Space Telescope shows details, however, that help in reconstructing the history of this gigantic tangle.  Deep and wide images show huge collisional shells, while deep central images reveal fewer globular clusters of stars toward NGC 1316's interior.  Such effects are expected in galaxies that have undergone collisions or merging with other galaxies in the past few billion years.  The dark knots and lanes of dust, prominent in the featured image, indicate that one or more of the devoured galaxies were spiral galaxies.  NGC 1316 spans about 50,000 light years and lies about 60 million light years away toward the constellation of the Furnace (Fornax)."
+          
+          // insert p element into DOM
+          document.querySelector("#div1").appendChild(p)
         })
     </script>
   </body>
