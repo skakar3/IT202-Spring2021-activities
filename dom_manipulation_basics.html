@@ -37,7 +37,7 @@
       //2
       // Set the color property for div1 to be #D50032
       div1.style.color = "#D50032";
-        
+
       //3
       // Add the class big to div1
       div1.classList.add("big");
@@ -56,7 +56,7 @@
       // Remove div3
       let div3 = document.getElementById("div3");
       div3.remove();
-        
+
       //7
       // Set the contents of the title element to be your GitHub account name.
       document.querySelector("title").innerText = "skakar3";
@@ -73,7 +73,22 @@
       // Add that list item element to the unordered list
       document.querySelector("ul").appendChild(list);
 
+      //11
+      // Remove the class big from the first list item element
+      let li = document.querySelector("li");
+      li.classList.remove("big");
 
+      //12
+      // Add the class blue to the second list item element
+      list.classList.add("blue");
+
+      //13
+      // Create a clone of the image element
+      let img2 = document.querySelector("img").cloneNode(true);
+
+      //14
+      // Append the clone to div1
+      div1.appendChild(img2);
 
     </script>
 
