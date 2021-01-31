@@ -42,6 +42,15 @@
         elem.addEventListener("mouseover", mouseoverHandler);
           elem.addEventListener("mouseout", mouseoutHandler);
       }
+        
+            function onclickHandler() {
+        let quoteURL = this.getAttribute("cite");
+        window.open(quoteURL);
+
+      }
+
+      let blockQuote = document.querySelector("blockquote");
+      blockQuote.addEventListener("click", onclickHandler);
 
 
 
