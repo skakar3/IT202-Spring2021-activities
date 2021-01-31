@@ -29,7 +29,14 @@
     </blockquote>
 
     <script>
-
+      function mouseoverHandler() {
+        this.classList.add("bigger");
+      }  
+        
+      let elements = document.querySelectorAll("div > img");
+      for (let elem of elements) {
+        elem.addEventListener("mouseover", mouseoverHandler);
+      }
 
 
 
