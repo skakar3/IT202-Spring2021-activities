@@ -33,9 +33,14 @@
         this.classList.add("bigger");
       }  
         
+      function mouseoutHandler() {
+        this.classList.remove("bigger");
+      }
+        
       let elements = document.querySelectorAll("div > img");
       for (let elem of elements) {
         elem.addEventListener("mouseover", mouseoverHandler);
+          elem.addEventListener("mouseout", mouseoutHandler);
       }
 
 
