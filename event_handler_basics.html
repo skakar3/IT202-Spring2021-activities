@@ -29,21 +29,26 @@
     </blockquote>
 
     <script>
+      // function to add the bigger class to the element that invokes it
       function mouseoverHandler() {
         this.classList.add("bigger");
-      }  
-        
+      }
+
+      // function to remove the bigger class from the element that invokes it
       function mouseoutHandler() {
         this.classList.remove("bigger");
       }
-        
+      
       let elements = document.querySelectorAll("div > img");
+      // iterate over each img element inside div and add event listners to them
       for (let elem of elements) {
         elem.addEventListener("mouseover", mouseoverHandler);
-          elem.addEventListener("mouseout", mouseoutHandler);
+        elem.addEventListener("mouseout", mouseoutHandler);
       }
-        
-            function onclickHandler() {
+
+      // function to open a new window with the 
+      // URL associated with the cite attribute of the element
+      function onclickHandler() {
         let quoteURL = this.getAttribute("cite");
         window.open(quoteURL);
 
@@ -51,8 +56,6 @@
 
       let blockQuote = document.querySelector("blockquote");
       blockQuote.addEventListener("click", onclickHandler);
-
-
 
     </script>
 
