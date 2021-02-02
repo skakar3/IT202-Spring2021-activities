@@ -31,45 +31,47 @@
     </div>
 
 
-
-
-
-
     <script integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
-
+    
+    // fetch data of libraries from the City of Chicago Library dataset
     fetch ("https://data.cityofchicago.org/resource/x8fc-8rcq.json")
-        
+    
     .then ( (response)=> {
       return response.json()
     })
 
     .then ( (json) => {
+      // loop to iterate over each library element in the dataset of libraries
       for (let library of json) {
         
+        // clone the existing card
         let cardClone = document.querySelector(".card").cloneNode(true);
         
+        // update card title with library name
         let libName = library.name_;
         cardClone.querySelector(".card-title").innerText = libName;
 
+        // update card subtitle with library hours of operation
         let hrsOfOperation = library.hours_of_operation;
         cardClone.querySelector(".card-subtitle.mb-2.text-muted").innerText = hrsOfOperation;
 
+        // update inner text of card with address, city, state, zip, and phone of library  
         let address = library.address;
         let city = library.city;
         let state = library.state;
         let zip = library.zip;
         let phone = library.phone;
         cardClone.querySelector(".card-text").innerText = address + "\n" + city + ", " + state + " " + zip + " \n\n" + phone;
-
+        
+        // update card-link with URL to library website
         cardClone.querySelector(".card-link").innerText = "Website";
         let websiteUrl = library.website.url;
-
         cardClone.querySelector(".card-link").href = websiteUrl;
-
+        
+        // append the cardClone to the row
         document.querySelector(".row").appendChild(cardClone);
       }
     });
-
     </script>
 
     
