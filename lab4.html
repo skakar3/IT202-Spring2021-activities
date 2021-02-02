@@ -61,6 +61,10 @@
         let phone = library.phone;
         cardClone.querySelector(".card-text").innerText = address + "\n" + city + ", " + state + " " + zip + " \n\n" + phone;
 
+        cardClone.querySelector(".card-link").innerText = "Website";
+        let websiteUrl = library.website.url;
+
+        cardClone.querySelector(".card-link").href = websiteUrl;
 
         document.querySelector(".row").appendChild(cardClone);
       }
