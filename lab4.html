@@ -51,6 +51,9 @@
         let libName = library.name_;
         cardClone.querySelector(".card-title").innerText = libName;
 
+        let hrsOfOperation = library.hours_of_operation;
+        cardClone.querySelector(".card-subtitle.mb-2.text-muted").innerText = hrsOfOperation;
+
 
         document.querySelector(".row").appendChild(cardClone);
       }
