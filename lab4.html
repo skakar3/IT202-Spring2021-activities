@@ -54,6 +54,13 @@
         let hrsOfOperation = library.hours_of_operation;
         cardClone.querySelector(".card-subtitle.mb-2.text-muted").innerText = hrsOfOperation;
 
+        let address = library.address;
+        let city = library.city;
+        let state = library.state;
+        let zip = library.zip;
+        let phone = library.phone;
+        cardClone.querySelector(".card-text").innerText = address + "\n" + city + ", " + state + " " + zip + " \n\n" + phone;
+
 
         document.querySelector(".row").appendChild(cardClone);
       }
