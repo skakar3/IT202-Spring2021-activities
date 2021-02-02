@@ -47,6 +47,10 @@
       for (let library of json) {
         
         let cardClone = document.querySelector(".card").cloneNode(true);
+        
+        let libName = library.name_;
+        cardClone.querySelector(".card-title").innerText = libName;
+
 
         document.querySelector(".row").appendChild(cardClone);
       }
