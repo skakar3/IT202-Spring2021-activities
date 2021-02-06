@@ -71,7 +71,14 @@ It is difficult to get a man to understand something, when his salary depends up
       let textareaElement = document.querySelector("#textarea1");
       textareaElement.value = quote;
 
+      // Add a change event handler on the select control;  the function should log the selected value to the console
+      function changeHandler() {
+        let selectedValue = document.querySelector("#select1").value;
+        console.log(selectedValue);
+      }
 
+      let selectElement = document.querySelector("select");
+      selectElement.addEventListener("change", changeHandler);
     
     </script>
   </body>
