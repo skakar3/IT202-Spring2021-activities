@@ -31,7 +31,7 @@
             data.addRow([type.school_type, parseInt(type.count_school_type)])
           });
 
-                 // Set chart options
+        // Set chart options
         var options = {'title':'Pie chart of diferrent types of schools',
                        'width':400,
                        'height':300};
@@ -41,12 +41,45 @@
         chart.draw(data, options);
         })
 
-      }      
+        var lineChrt = new google.visualization.DataTable();
+        
+        lineChrt.addColumn('string','date');
+        lineChrt.addColumn('number','sum_total_doses_cumulative');
+        
+        fetch("https://data.cityofchicago.org/resource/553k-3xzc.json?$SELECT=date,sum(total_doses_cumulative)&$GROUP=date&$ORDER=date")
+        .then( (response) => {
+          return response.json()
+        })
+        .then( (json) => {
+          json.forEach( (type) => {
+            data.addRow([type.date, parseInt(type.sum_total_doses_cumulative)])  });
+        
+        // Set chart options
+        
+        var options = {'title':'pie chart representation of different public schools in chicago',
+        'width':400,
+        'height':300};
+        
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.querySelector('#line_chart_div'));
+        chart.draw(data, options);
+        })
+
+        
+      }
+
+
+
     </script>
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
+
+    <!--Div that will hold the line chart-->
+    <div id="line_chart_div"></div>
+
+
   </body>
 </html>
