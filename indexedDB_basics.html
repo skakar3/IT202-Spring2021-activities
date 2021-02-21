@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+      <!-- Include Dexie -->
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+      <script>
+          //
+          // Define your database
+          //
+          var db = new Dexie("schools_database");
+          db.version(1).stores({
+              schools: 'long_name,student_attainment_rating,student_attendance_year_1'
+          });
+
+          fetch("https://data.cityofchicago.org/resource/dw27-rash.json")
+
+          .then ( (response)=> {
+            return response.json()
+          })
+
+          .then ((json) => {
+            for (let school of json) {
+              let name = school.long_name;
+              let attainment_rating = school.student_attainment_rating;
+              let attendance_year_1 = parseFloat(school.student_attendance_year_1);
+              let school_address = school.address;
+              let schoolType = school.school_type;
+              let website_URL = school.website;
+
+              db.schools.add({long_name: name, student_attainment_rating: attainment_rating, student_attendance_year_1: attendance_year_1, address: school_address, school_type: schoolType, website: website_URL});
+              
+            }
+          });
+      </script>
+  </head>
+
+  <body>
+    <div id="q1">
+      a.  get the count of all schools;<br>
+      result: 654
+    </div> 
+
+
+  </body>
+</html>
