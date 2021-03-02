@@ -21,6 +21,25 @@
       gameObjs.push( {x: 275, y: 275, radius: 25, color: "green" } )
       gameObjs.push( {x: 200, y: 300, radius: 25, color: "blue" } )
 
+      // function to generate a random color
+      let randomColor = () => {
+        let chars = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += chars[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+      
+      // loop to create 25 additional gameObjects with random x, y and color values; and push them to the gameObjs
+      for (let i = 0; i < 25; i++) {
+        let radius = 25;
+        let x = radius + (Math.random() * (c.width - (2 * radius)));
+        let y = radius + (Math.random() * (c.height - (2 * radius)));
+        let color = randomColor();
+        gameObjs.push({x:x, y:y, radius: radius, color:color});
+      }
+
       gameObjs.forEach( (obj) => {
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
@@ -58,11 +77,11 @@
       //    with a white border
       gameObjs.forEach( (objA) => {
         gameObjs.forEach( (objB) => {
-          // check if we are not comapring the same circle
+          // check if we are not comparing the same circle
           if (objA != objB) {
             // check if the circles are colliding
             if (areColliding(objA, objB)) {
-              // redraw the circles with white broders
+              // redraw the circles with white borders
               redrawCircle(objB, 5, "white");
               redrawCircle(objA, 5, "white");
             }
