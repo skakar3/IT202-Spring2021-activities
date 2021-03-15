@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>locationAwareMap</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 100%;
+      }
+      html,
+      body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <script>
+      function watchUserPos() {
+        navigator.geolocation.watchPosition((userPos) => {
+          let center = { lat: userPos.coords.latitude, lng: userPos.coords.longitude};
+
+          // draw a circle at the user's current position
+          const circleMarker = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 4,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: center,
+            radius: 4,
+          });
+
+          // get the date
+          let date = Date(); 
+
+          // store the user's location and time data
+          let userLocData = "{lat: " + userPos.coords.latitude + ", lng: " + userPos.coords.longitude + "}" + date;
+
+          // prepend to the user's location and time data to the div element
+          let divElem = document.querySelector("#userCoordinates");
+          let list = document.querySelector("#list");
+
+          // create and initialize list item with user's data
+          let listItem = document.createElement('li');
+          listItem.innerText = userLocData;
+
+          list.prepend(listItem);
+          divElem.appendChild(list);
+        })
+      }
+      
+      // create a variable to reference the map object
+      let map;
+
+      // Initialize and add the map
+      function initMap() {
+        navigator.geolocation.watchPosition((userPos) => {
+
+          // The current location of the user
+          let location = { lat: userPos.coords.latitude, lng: userPos.coords.longitude};
+          
+          // The map, centered at the users current location
+          map = new google.maps.Map(document.querySelector("#map"), {
+            zoom: 17,
+            center: location,
+            styles: [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            {
+              elementType: "labels.text.stroke",
+              stylers: [{ color: "#242f3e" }],
+            },
+            {
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#746855" }],
+            },
+            {
+              featureType: "administrative.locality",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "poi",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "geometry",
+              stylers: [{ color: "#263c3f" }],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#6b9a76" }],
+            },
+            {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [{ color: "#38414e" }],
+            },
+            {
+              featureType: "road",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#212a37" }],
+            },
+            {
+              featureType: "road",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry",
+              stylers: [{ color: "#746855" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#1f2835" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#f3d19c" }],
+            },
+            {
+              featureType: "transit",
+              elementType: "geometry",
+              stylers: [{ color: "#2f3948" }],
+            },
+            {
+              featureType: "transit.station",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [{ color: "#17263c" }],
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#515c6d" }],
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.stroke",
+              stylers: [{ color: "#17263c" }],
+            },
+          ],          
+          });
+        })
+        watchUserPos();
+      }
+
+    </script>
+  </head>
+  <body>
+    <h3 class="bg-primary text-white text-center border border-primary border-5 rounded-3">Welcome, to the Location Map</h3>
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+    
+    <!-- store the user's location and time data -->
+    <h5 class="bg-primary text-white text-center border border-primary border-5">The following is your geolocation trail:</h5>
+    <div id="userCoordinates">
+      <ul id="list"></ul>
+    </div>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSKNyiFagjJlH8i8Th-5y-sC4cJFy9nGQ&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+
+  </body>
+</html>
