@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Lab 10 - Speech Synthesis</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+  </head>
+  
+  <body>
+     <h3 class="bg-primary text-white text-center border border-primary border-5">Welcome, to Speech Synthesizer</h3>
+
+    <form id="data">
+      <!-- textarea for user input -->
+      <label for="userInput">Enter Text:</label><br>
+      <textarea form="data" id="userInput" name="userInput" rows="2" cols="50"></textarea>
+      <br><br>
+
+      <!-- select control to display the languages to choose from -->
+      <label for="userInput">Choose a language:</label><br>
+      <select name="Languages" id="Languages">
+        <option></option>
+      </select>
+      <br><br>
+      
+      <!-- button to cause the input text to be spoken -->
+      <button id="Speak" type="submit" class="btn btn-primary btn-lg rounded-circle shadow p-3" disabled>Speak</button>
+    </form>
+
+    <script>
+
+      // when the page loads, get the available languages from the set of voices available on the device
+      
+      let synth = window.speechSynthesis;
+      let inputForm = document.querySelector('#data');
+      let inputTxt = document.querySelector('#userInput');
+      let voiceSelect = document.querySelector('select');
+      let languages = document.querySelector('#Languages');
+
+      let voices = [];
+      
+      // method to populate the select control with the options
+      let populateVoiceList = () => {
+        voices = synth.getVoices();
+
+        for (let i = 0; i < voices.length ; i++) {
+          let option = document.createElement('option');
+          option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+          if (voices[i].default) {
+            option.textContent += ' -- DEFAULT';
+          }
+
+          option.value = i;
+          voiceSelect.appendChild(option);
+        }
+      }
+
+      // populate the select control with the options
+      populateVoiceList();
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+      }
+
+      // add a change event handler on the select control which enables the button and which selects the appropriate voice
+
+      languages.addEventListener('change', (event) => {
+        // enable the speak button only when an option is selected
+        if (languages.value != "") {
+            speakBtn.disabled = false;
+        } else {
+          speakBtn.disabled = true;
+        }
+      });
+
+      // add a click event handler on the button which creates or updates the SpeechSynthesisUtterance with the appropriate language, voice and text
+
+      let speakBtn = document.querySelector('#Speak');
+
+      speakBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+        utterThis.voice = voices[languages.value];
+        synth.speak(utterThis);
+        inputTxt.blur();
+      });
+
+    </script>
+  </body>
+</html>
