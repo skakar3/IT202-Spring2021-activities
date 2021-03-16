@@ -21,7 +21,7 @@
       <br><br>
 
       <!-- select control to display the languages to choose from -->
-      <label for="userInput">Choose a language:</label><br>
+      <label for="Languages">Choose a language:</label><br>
       <select name="Languages" id="Languages">
         <option></option>
       </select>
@@ -38,7 +38,6 @@
       let synth = window.speechSynthesis;
       let inputForm = document.querySelector('#data');
       let inputTxt = document.querySelector('#userInput');
-      let voiceSelect = document.querySelector('select');
       let languages = document.querySelector('#Languages');
 
       let voices = [];
@@ -56,7 +55,7 @@
           }
 
           option.value = i;
-          voiceSelect.appendChild(option);
+          languages.appendChild(option);
         }
       }
 
