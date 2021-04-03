@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+
+  <body>
+    <!-- Text Input with the label Enter your name  -->
+    <label class="mdc-text-field mdc-text-field--filled">
+      <span class="mdc-text-field__ripple"></span>
+      <span class="mdc-floating-label" id="my-label-id">Enter your name</span>
+      <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+      <span class="mdc-line-ripple"></span>
+    </label> <br> <br>
+    
+    
+    <!-- Button with the label Show Snackbar -->
+    <button class="mdc-button mdc-button--raised" onclick="showSnackbar()">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">Show Snackbar</span>
+    </button>
+
+    <!-- Snack8bar which will display the text You entered + the value from the Text Input box. -->
+    <div class="mdc-snackbar">
+      <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+        <div class="mdc-snackbar__label" aria-atomic="false">
+          You entered
+        </div>
+        <div class="mdc-snackbar__actions" aria-atomic="true">
+          <button type="button" class="mdc-button mdc-snackbar__action">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add script to initialize the components
+      let textInput = mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+
+      let button = mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button--raised'));
+    
+      let snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector(".mdc-snackbar"));
+
+      // function that is invoked when the button is clicked, the snackbar text is set and the snackbar is shown.
+      let showSnackbar = () => {
+        let userInput = textInput.value;
+        snackbar.labelText = "You entered " + userInput;
+        snackbar.open();
+      }
+    </script>
+  </body>
+</html>
